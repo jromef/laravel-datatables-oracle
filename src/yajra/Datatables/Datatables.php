@@ -19,6 +19,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Str;
 use Illuminate\View\Compilers\BladeCompiler;
 
@@ -185,7 +186,10 @@ class Datatables
     public function __construct()
     {
         $request = new Request($_GET, $_POST);
-        $this->setData($this->processData($request->input()));
+
+        //$this->setData($this->processData($request->input()));
+        
+        $this->setData($this->processData(RequestFacade::input()));
 
         return $this;
     }
